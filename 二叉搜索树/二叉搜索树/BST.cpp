@@ -147,9 +147,76 @@ void Test()
 	s.Remove(2);
 	s.Output();
 }
+int max(BSTreeNode<int, int>* root)
+{
+	while (root->rchild != NULL)
+	{
+		root = root->rchild;
+	}
+	return root->key_;
+}
+
+int min(BSTreeNode<int, int>* root)
+{
+	while (root->lchild != NULL)
+	{
+		root = root->lchild;
+	}
+	return root->key_;
+}
+
+
+bool detect(BSTreeNode<int, int>* root, int max, int min)
+{
+	if (root == NULL)
+	{
+		return true;
+	}
+
+	if (root->key_ < min || root->key_ > max)
+	{
+		return false;
+	}
+	return detect(root->lchild, max, min) && detect(root->rchild, max, min);
+}
+
+
+void Test2()
+{
+	BSTreeNode<int, int>* root_ = new BSTreeNode<int, int>(2, 10);
+	BSTreeNode<int, int>* left_ = new BSTreeNode<int, int>(1, 10);
+	BSTreeNode<int, int>* right_ = new BSTreeNode<int, int>(3, 10);
+
+	root_->lchild = left_;
+	root_->rchild = right_;
+	int max1 = max(root_);
+	int min1 = min(root_);
+
+	if (detect(root_, max1, min1))
+	{
+		cout << "yes";
+	}
+
+	root_->lchild = right_;
+	root_->rchild = left_;
+
+	int max2 = max(root_);
+	int min2 = min(root_);
+
+	if (detect(root_, max2, min2))
+	{
+		cout << "yes";
+	}
+
+
+
+}
+
+
 
 int main()
 {
-	Test();
+	//Test();
+	Test2();
 	return 0;
 }
