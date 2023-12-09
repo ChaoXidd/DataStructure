@@ -209,28 +209,7 @@ void  ExpandableLinkedHashTable<K, E>::Clear()
 }
 
 
-//
-//template<class K, class E>
-//void  ExpandableLinkedHashTable<K, E>::TraverseHT()
-//{
-//    for (int i = 0; i < TableSize; i++)
-//    {
-//        //if (HashTable[i] != NULL)
-//        //{
-//        //    /*     DbListNode<K, E>* p = HashTable[i]->getFirst()->rLink;
-//        //    while (p != HashTable[i]->getFirst())
-//        //    {
-//        //        cout << p->data;
-//        //        p = p->rLink;
-//        //    }*/
-//        //    cout << endl;
-//        //}
-//        //else if
-//        //{
-//         //   cout << "空" << endl;
-//        //}
-//    }
-//}
+
 
 
 

@@ -130,11 +130,13 @@
     <ClInclude Include="DbLinkedList.h" />
     <ClInclude Include="ExpandableArrayList.h" />
     <ClInclude Include="ExpandableLinkedHashTable.h" />
+    <ClInclude Include="HashMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DbLinkedList.cpp" />
     <ClCompile Include="ExpandableArrayList.cpp" />
     <ClCompile Include="ExpandableLinkedHashTable.cpp" />
+    <ClCompile Include="HashMap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
