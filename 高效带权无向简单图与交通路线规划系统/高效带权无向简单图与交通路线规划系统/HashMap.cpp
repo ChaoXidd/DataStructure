@@ -18,7 +18,7 @@ bool HashMap<K, V>::containsKey(K& key) {
     int bucket = -1;
 
     Map->findPos(key, bucket);
-    return bucket != -1;
+    return (bucket != -1);
 }
 
 template<class K, class V>
@@ -35,6 +35,7 @@ V HashMap<K, V>::Remove(K& key) {
     if (Map->findPos(key, bucket)) {
         V value = getValue(key);
         key_array.erase(key);
+        Map->Remove(key);
         return value;
     }
 

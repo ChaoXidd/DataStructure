@@ -137,6 +137,18 @@ int  ExpandableLinkedHashTable<K, E>::Remove(K& k, E& e)
 }
 
 
+template<class K, class E>
+int  ExpandableLinkedHashTable<K, E>::Remove(K& k)
+{
+    if (TableSize == 0) return  0;
+    int bucket = getBucket(k);
+    if (HashTable[bucket] == NULL) return 0;   //桶为空
+    if (HashTable[bucket]->Remove(k))   //如果存在该关键码的结点
+    {
+        return 1;
+    }
+    return 0;
+}
 
 
 

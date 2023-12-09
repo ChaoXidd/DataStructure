@@ -38,6 +38,9 @@ public:
 
     int Remove(K& k, E& e);
 
+    int Remove(K& k);
+    
+
     void resizeTable();
 
     void Clear();

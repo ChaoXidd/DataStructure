@@ -52,7 +52,6 @@ public:
 
     int getBucketNum() {
         return Map->getSize();
-
     }
 
 };
