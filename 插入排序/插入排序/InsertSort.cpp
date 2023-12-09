@@ -23,7 +23,7 @@ void ShellSort(int a[], int n)
 	int gap = n;
 	do {
 		gap = gap / 3 + 1;
-		for (int i = gap; i < n; i++)
+		for (int i = gap; i < n; i ++)
 		{
 			int key = a[i];
 			int j = i - gap;
