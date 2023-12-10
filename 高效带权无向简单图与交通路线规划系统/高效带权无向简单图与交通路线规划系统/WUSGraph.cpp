@@ -1,4 +1,5 @@
-﻿#include"WUSGraph.h"
+﻿#pragma once
+#include"WUSGraph.h"
 
 template<class V, class W>
 int WUSGraph<V, W>::vertexCount() {
@@ -23,6 +24,7 @@ V* WUSGraph<V, W>::getVertices()
 
 
 
+
 template<class V, class W>
 void WUSGraph<V, W>::addVertex(V tar_key)
 {
@@ -36,7 +38,6 @@ void WUSGraph<V, W>::addVertex(V tar_key)
 
 	++vertex_count;
 }
-
 
 template<class V, class W>
 bool WUSGraph<V, W>::isVertex(V tar_key)
@@ -78,13 +79,13 @@ void WUSGraph<V, W>::addEdge(V v1_key, V v2_key, W input_weight)
 		edge2.vertex_point = vertex_dbnode1;
 		edge1.weight = input_weight;
 		edge2.weight = input_weight;
-		DbListNode<int, Edge<int, W>>* edge_node1 = new DbListNode<int, Edge<int, W>>(v1_No, edge1);
-		DbListNode<int, Edge<int, W>>* edge_node2 = new DbListNode<int, Edge<int, W>>(v2_No, edge2);
-		edge1.friend_point = edge_node2;
-		edge2.friend_point = edge_node1;                                                            //设定指针和权值，准备插入邻接表中
-
 		vertex1.EdgeList.push_front(v2_No, edge1);
 		vertex2.EdgeList.push_front(v1_No, edge2);                                             //插入邻接表中
+
+		DbListNode<int, Edge<int, W>>* edge_Node1 = vertex1.EdgeList.getFirst()->rLink;
+		DbListNode<int, Edge<int, W>>* edge_Node2 = vertex2.EdgeList.getFirst()->rLink;
+		edge_Node1->data.friend_point = edge_Node2;
+		edge_Node2->data.friend_point = edge_Node1;                                            //给朋友指针赋值
 
 		++vertex1.degree;
 		++vertex2.degree;
@@ -254,4 +255,76 @@ bool WUSGraph<V, W>::isEdge(V v1_key, V v2_key)
 	if (edge_hash.getValue(key) == pair<int, int>()) return 0;
 	else return 1;
 
+}
+
+
+template<class V, class W>
+void WUSGraph<V, W>::Travel_Single_Bucket(V vertex_key)
+{
+	if (!isVertex(vertex_key)) return;
+	int tar_No = this->vertex_hash.getValue(vertex_key);
+	DbListNode<int, Vertex<int, W>>* tar_Node = this->vertex_list.Search(tar_No);
+	Vertex<int, W> tar_vertex = tar_Node->data;
+	DbLinkedList<int, Edge<int, W>> tar_edgelist = tar_vertex.EdgeList;           //找到目标节点的edgelist
+
+	DbListNode<int, Edge<int, W>>* first = tar_edgelist.getFirst();
+	DbListNode<int, Edge<int, W>>* index = first->rLink;                          //初始化遍历指针
+
+	int count = 1;
+
+	while (index != NULL && index != first) {
+
+		cout << tar_No << "的第" << count++ << "个边节点指向 " << index->key;
+
+		cout << "  它的伙伴指针指向 " << index->data.friend_point->key << endl;
+
+		index = index->rLink;
+	}
+}
+
+
+
+void test_WUSGraph() {
+	WUSGraph<int, int> W1(10000);
+
+	for (int i = 1; i <= 10000; ++i) {
+		W1.addVertex(i);
+	}
+	for (int i = 1; i <= 9998; ++i) {
+		W1.addEdge(i, i + 2, i + 8);
+	}
+
+	cout << "当前节点数量为:  " << W1.vertexCount() << endl;  	cout << endl;
+
+	cout << "当前边数量为:  " << W1.edgeCount() << endl;  	cout << endl;
+
+	cout << "遍历节点5415的边节点: " << endl;  	cout << endl;
+
+	W1.Travel_Single_Bucket(5415); cout << endl;
+
+	cout << "遍历节点5417的边节点: " << endl;   cout << endl;
+
+	W1.Travel_Single_Bucket(5417);  	cout << endl;
+
+	W1.removeEdge(5415, 5417);
+
+	cout << "删除边5415,5417后再遍历5415节点: " << endl; 	cout << endl;
+
+	W1.Travel_Single_Bucket(5415);  cout << endl;
+
+	cout << "删除边5415,5417后再遍历5417节点: " << endl; cout << endl;
+
+	W1.Travel_Single_Bucket(5417); cout << endl;
+
+	int tar_weight = W1.getWeight(940, 942);
+
+	cout << "940-942的权值为" << tar_weight << "  正确值为948" << endl;
+
+}
+
+
+int main()
+{
+	test_WUSGraph();
+	return 0;
 }

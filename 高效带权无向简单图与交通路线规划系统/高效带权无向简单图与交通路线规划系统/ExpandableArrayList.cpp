@@ -1,4 +1,5 @@
-﻿#include"ExpandableArrayList.h"
+﻿#pragma once
+#include"ExpandableArrayList.h"
 
 
 template<class E>

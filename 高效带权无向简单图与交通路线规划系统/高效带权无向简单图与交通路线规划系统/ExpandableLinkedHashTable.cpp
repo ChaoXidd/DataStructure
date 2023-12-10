@@ -1,4 +1,5 @@
-﻿#include"ExpandableLinkedHashTable.h"
+﻿#pragma once
+#include"ExpandableLinkedHashTable.h"
 
 
 template<class K, class E>
@@ -260,15 +261,6 @@ void ExpandableLinkedHashTable<K, E>::test_hashtb()
  }
 
 
-
-int main()
-{
-    ExpandableLinkedHashTable<int, int> hashtb = ExpandableLinkedHashTable<int, int>();
-    hashtb.test_hashtb();
-
-
-	return 0;
-}
 
 
 

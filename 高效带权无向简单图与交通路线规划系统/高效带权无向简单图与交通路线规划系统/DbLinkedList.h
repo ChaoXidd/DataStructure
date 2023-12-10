@@ -83,7 +83,7 @@ public:
 
 	DbLinkedList()
 	{
-		this->first = new DbListNode<K, E>(-999, -999);
+		this->first = new DbListNode<K, E>();
 		first->lLink = first;
 		first->rLink = first;
 	}

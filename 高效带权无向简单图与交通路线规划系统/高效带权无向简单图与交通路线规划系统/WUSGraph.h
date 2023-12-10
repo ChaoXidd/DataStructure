@@ -3,7 +3,14 @@
 #include"ExpandableArrayList.h"
 #include"ExpandableLinkedHashTable.h"
 #include"HashMap.h"
+#include"DbLinkedList.cpp"
+#include"ExpandableArrayList.cpp"
+#include"ExpandableLinkedHashTable.cpp"
+#include"HashMap.cpp"
 #include<iostream>
+
+
+
 using namespace std;
 
 template<class V, class W>
@@ -136,7 +143,7 @@ private:
 
     V* vertex_array;                        //用于V* getVerices()返回顶点数组
 
-    int index = 0;                              //在index位置插入，初始值为1，代表新插入节点
+    int index = 1;                              //在index位置插入，初始值为1，代表新插入节点
 
 public:
 
@@ -168,7 +175,7 @@ public:
 
     W getWeight(V v1_key, V v2_key);
 
-
+    void Travel_Single_Bucket(V vertex_key);
 
 
 };

@@ -1,4 +1,5 @@
-﻿#include"DbLinkedList.h"
+﻿#pragma once
+#include"DbLinkedList.h"
 
 
 template <class K, class E>
